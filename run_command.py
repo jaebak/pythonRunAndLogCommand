@@ -10,7 +10,7 @@ def output_reader(process, log_file):
 
 # https://eli.thegreenplace.net/2017/interacting-with-a-long-running-child-process-in-python/
 def runAndLogCommand(command, log_file):
-  print("\nRunning command2: "+command)
+  print("\nRunning command: "+command)
   log_file.write("\nRunning command: "+command+'\n')
   process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
