@@ -1,5 +1,5 @@
 Python script that runs commands
-- run_command.py
+- `run_command.py`
 
 Example commands
 - `test_command.py`: Command that has sleep
