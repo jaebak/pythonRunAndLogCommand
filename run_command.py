@@ -17,6 +17,7 @@ def runAndLogCommand(command, log_file):
   thread = threading.Thread(target=output_reader, args=(process,log_file))
   thread.start()
   thread.join()
+  return process.poll()
 
 if __name__ == "__main__":
   # Use 'python3 -u', which is unbuffer mode, to print things quicker
