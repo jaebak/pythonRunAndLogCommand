@@ -2,6 +2,7 @@
 from __future__ import print_function
 import subprocess
 import threading
+import time
 
 def output_reader_logger(process, log_file, commandOutput):
   for line in iter(process.stdout.readline, b''):
@@ -20,8 +21,13 @@ def runCommandAndLog(command, log_file):
   thread = threading.Thread(target=output_reader_logger, args=(process,log_file, commandOutput))
   thread.start()
   thread.join()
+  # Try to get poll
+  for iTime in range(10):
+    if (process.poll() == None): time.sleep(1)
+    else: break
   return process.poll(), commandOutput[0]
 
+####
 
 def output_reader(process, commandOutput):
   for line in iter(process.stdout.readline, b''):
@@ -37,6 +43,10 @@ def runCommand(command):
   thread = threading.Thread(target=output_reader, args=(process,commandOutput))
   thread.start()
   thread.join()
+  # Try to get poll
+  for iTime in range(10):
+    if (process.poll() == None): time.sleep(1)
+    else: break
   return process.poll(), commandOutput[0]
 
 if __name__ == "__main__":
